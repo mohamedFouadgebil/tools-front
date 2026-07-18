@@ -1,4 +1,4 @@
-const API = "http://127.0.0.1:5000";
+const API = "https://tools-back.vercel.app/";
 
 function pickEncryptFile() {
   const input = document.createElement("input");
