@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Red Phantom Tools</title>
+    <link rel="icon" href="./images/Red Phantom.png" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      body {
+        background: radial-gradient(circle at 30% 10%, #120017, #05060f 80%);
+        color: #e6e6e6;
+        overflow-y: auto;
+        animation: pageFade 1.2s ease forwards;
+        position: relative;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(
+            circle at 20% 15%,
+            rgba(255, 0, 60, 0.15),
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(255, 0, 60, 0.1),
+            transparent 45%
+          );
+        z-index: -1;
+      }
+
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #ff003c, #ff4d6d);
+        border-radius: 10px;
+      }
+
+      @keyframes pageFade {
+        from {
+          opacity: 0;
+          transform: translateY(25px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes neonGlow {
+        0% {
+          text-shadow:
+            0 0 6px #ff003c,
+            0 0 20px #ff003c66;
+        }
+        50% {
+          text-shadow:
+            0 0 18px #ff003c,
+            0 0 40px #ff003caa;
+        }
+        100% {
+          text-shadow:
+            0 0 6px #ff003c,
+            0 0 20px #ff003c66;
+        }
+      }
+
+      @keyframes cardFloat {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .alert-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(90deg, #ff003c, #b3002a);
+        color: #fff;
+        text-align: center;
+        font-weight: bold;
+        letter-spacing: 1px;
+        z-index: 100;
+        box-shadow: 0 0 35px #ff003caa;
+      }
+
+      header {
+        padding: 160px 20px 80px;
+        text-align: center;
+        background:
+          linear-gradient(180deg, rgba(255, 0, 60, 0.3), transparent),
+          radial-gradient(circle at center, #1a001f, #05060f);
+        border-bottom: 2px solid #ff003c33;
+      }
+
+      header h1 {
+        font-size: 3.8rem;
+        font-weight: 900;
+        color: #fff;
+        text-shadow:
+          0 0 12px rgba(255, 0, 60, 0.9),
+          0 0 30px rgba(255, 0, 60, 0.5);
+        animation: neonGlow 3s infinite;
+      }
+
+      header p {
+        margin-top: 12px;
+        font-size: 1.15rem;
+        opacity: 0.9;
+      }
+
+      .return-btn {
+        display: inline-block;
+        margin-top: 18px;
+        padding: 12px 28px;
+        background: linear-gradient(135deg, #ff003c, #c4002f);
+        color: #fff;
+        border-radius: 14px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: 0.3s ease;
+        box-shadow:
+          0 0 25px #ff003c88,
+          0 5px 25px rgba(0, 0, 0, 0.45);
+      }
+
+      .return-btn:hover {
+        transform: scale(1.12);
+        box-shadow:
+          0 0 60px #ff003caa,
+          0 10px 35px rgba(0, 0, 0, 0.65);
+      }
+
+      .container {
+        width: 95%;
+        margin: 50px auto 100px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 42px;
+      }
+
+      .card {
+        position: relative;
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px) saturate(180%);
+        border-radius: 26px;
+        padding: 36px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+        transition: 0.35s ease;
+        overflow: hidden;
+      }
+
+      .cardContent {
+        display: none;
+        margin-top: 12px;
+        animation: fadeIn 0.5s ease forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 26px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.2),
+          transparent 40%
+        );
+        opacity: 0.35;
+        pointer-events: none;
+      }
+
+      .card:hover {
+        border-color: #ff003c;
+        box-shadow:
+          0 0 60px #ff003c77,
+          0 30px 75px rgba(0, 0, 0, 0.5);
+        transform: translateY(-12px) scale(1.02);
+      }
+
+      .card h2 {
+        color: #ff003c;
+        font-size: 1.85rem;
+        margin-bottom: 22px;
+        font-weight: 900;
+        text-shadow:
+          0 0 12px rgba(255, 0, 60, 0.85),
+          0 0 28px rgba(255, 0, 60, 0.45);
+        animation: neonGlow 4s infinite;
+      }
+
+      button {
+        width: 100%;
+        padding: 16px;
+        margin: 12px 0;
+        border-radius: 16px;
+        border: none;
+        cursor: pointer;
+        font-size: 1.08rem;
+        font-weight: bold;
+        color: #fff;
+        background: linear-gradient(135deg, #ff003c, #b3002a);
+        transition: 0.25s ease;
+        box-shadow: 0 0 30px #ff003c55;
+        position: relative;
+        overflow: hidden;
+      }
+
+      button::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          120deg,
+          transparent,
+          rgba(255, 255, 255, 0.25),
+          transparent
+        );
+        transform: translateX(-100%);
+      }
+
+      button:hover::after {
+        transform: translateX(100%);
+        transition: 0.6s;
+      }
+
+      button:hover {
+        transform: scale(1.08);
+        box-shadow:
+          0 0 50px #ff003caa,
+          0 10px 35px rgba(0, 0, 0, 0.55);
+      }
+
+      button[style*="background: #444"],
+      button[style*="background: #333"],
+      button[style*="background: #222"] {
+        background: linear-gradient(135deg, #2b2b2b, #151515) !important;
+        box-shadow: none;
+      }
+
+      label {
+        display: block;
+        margin: 10px 0 6px;
+        font-size: 0.97rem;
+        color: #ff6b86;
+        font-weight: bold;
+      }
+
+      input {
+        width: 100%;
+        padding: 14px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 0, 60, 0.45);
+        color: #fff;
+        outline: none;
+        transition: 0.25s ease;
+      }
+
+      input:focus {
+        border-color: #ff003c;
+        box-shadow: 0 0 22px #ff003caa;
+      }
+
+      pre {
+        margin-top: 15px;
+        padding: 16px;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 14px;
+        max-height: 260px;
+        overflow-y: auto;
+        font-size: 0.88rem;
+        border-left: 5px solid #ff003c;
+        box-shadow: inset 0 0 28px rgba(0, 0, 0, 0.65);
+        color: #00ff88;
+      }
+
+      .fadeBox {
+        animation: pageFade 0.7s ease forwards;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="alert-bar">Red Phantom — Dashboard Control Center</div>
+    <header>
+      <h1>Dashboard Tools</h1>
+      <p>
+        Manage all offensive, defensive, and cyber modules with precision and
+        control.
+      </p>
+    </header>
+
+    <div class="container">
+      <div class="card">
+        <h2>🔐 Encryption Tools</h2>
+        <button onclick="pickEncryptFile()">Encrypt File</button>
+        <button onclick="pickDecryptFile()">Decrypt File</button>
+        <button onclick="pickEncryptFolder()">Encrypt Folder</button>
+        <button onclick="pickDecryptFolder()">Decrypt Folder</button>
+      </div>
+
+      <div class="card">
+        <h2>🌐 Network Tools</h2>
+        <button onclick="runTool('networkScan')">Network Scan</button>
+
+        <div
+          id="networkScanCard"
+          class="fadeBox"
+          style="display: none; margin-top: 15px"
+        >
+          <label>Enter IP Range:</label>
+          <input type="text" id="ipRange" placeholder="192.168.1.0/24" />
+          <button onclick="startNetworkScan()">Start Scan</button>
+          <pre id="scanResults"></pre>
+          <button style="background: #444" onclick="closeNetworkScan()">
+            Close
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>⌨ Keylogger Tools</h2>
+        <button onclick="runTool('startKeylogger')">Start Keylogger</button>
+        <button onclick="runTool('stopKeylogger')">Stop Keylogger</button>
+        <button onclick="runTool('captureData')">Capture Data</button>
+      </div>
+
+      <div class="card">
+        <h2>🌍 Geolocation & Phone Tracker</h2>
+
+        <label>Track Website:</label>
+        <input id="geo_url" placeholder="https://example.com" />
+        <button onclick="trackGeoURL()">Track URL</button>
+
+        <pre id="geoResult">
+The results of the analysis will appear here...</pre
+        >
+      </div>
+      <div class="card">
+        <h2>📝 DocTrojan Tools</h2>
+        <button id="buildBtn">Build Trojan</button>
+        <button id="startListenerBtn">🚀 Start Real Listener</button>
+        <button id="stopListenerBtn" style="background: #444">
+          ⏹️ Stop Listener
+        </button>
+        <button id="refreshVictimsBtn">🔄 Refresh Victims</button>
+        <button id="clearVictimsBtn" style="background: #333">
+          🗑️ Clear Victims
+        </button>
+
+        <div
+          id="realSystemInfo"
+          style="
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(255, 0, 60, 0.1);
+            border-radius: 8px;
+            font-size: 12px;
+          "
+        >
+          <em>Loading system info...</em>
+        </div>
+
+        <div
+          id="realVictimsDiv"
+          style="
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border: 1px solid #00ff88;
+          "
+        >
+          <em>Waiting for REAL victims...</em>
+        </div>
+
+        <label>Send Command</label>
+        <input id="trojan_cmd" placeholder="Command" />
+        <button id="sendCmdBtn">Send</button>
+        <button id="clearLogsBtn" style="background: #222">
+          🗑️ Clear Logs
+        </button>
+
+        <pre id="trojan_logs">[+] Red Phantom Trojan Control System Ready</pre>
+      </div>
+    </div>
+    <script src="js/main.js"></script>
+  </body>
+</html>
