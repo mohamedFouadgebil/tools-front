@@ -616,7 +616,7 @@ class RealTrojanController {
 
   async refreshRealClients() {
     try {
-      const response = await fetch("/api/real/clients");
+      const response = await fetch('https://tools-back.vercel.app/api/real/clients');
       const data = await response.json();
       if (data.success) {
         const infoDiv = document.getElementById("realSystemInfo");
